@@ -7,13 +7,11 @@ import springdata.repository.PersonDerivedQueryRepository;
 
 import java.time.LocalDate;
 import java.util.List;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @DataJpaTest
 public class DerivedQueryTests {
 	
@@ -33,8 +31,8 @@ public class DerivedQueryTests {
         List<Person> personsByName = personRepository.findByName("Erkan");
 
         assertThat(personsByName).hasSize(2);
-        assertThat(personsByName.get(0)).isEqualToComparingFieldByField(p1);
-        assertThat(personsByName.get(1)).isEqualToComparingFieldByField(p3);
+        assertThat(personsByName.get(0)).usingRecursiveComparison().isEqualTo(p1);
+        assertThat(personsByName.get(1)).usingRecursiveComparison().isEqualTo(p3);
     }
 
     @Test
@@ -52,7 +50,8 @@ public class DerivedQueryTests {
         assertThat(personsByNameAndAge)
             .hasSize(1)
             .first()
-            .isEqualToComparingFieldByField(p1);
+            .usingRecursiveComparison().
+            isEqualTo(p1);
     }
 
     @Test
@@ -68,8 +67,8 @@ public class DerivedQueryTests {
         final List<Person> personsBySurname = personRepository.findBySurnameIn("Test", "Sari");
 
         assertThat(personsBySurname).hasSize(2);
-        assertThat(personsBySurname.get(0)).isEqualToComparingFieldByField(p2);
-        assertThat(personsBySurname.get(1)).isEqualToComparingFieldByField(p3);
+        assertThat(personsBySurname.get(0)).usingRecursiveComparison().isEqualTo(p2);
+        assertThat(personsBySurname.get(1)).usingRecursiveComparison().isEqualTo(p3);
     }
 
     @Test
@@ -83,7 +82,8 @@ public class DerivedQueryTests {
         assertThat(personsByName)
             .hasSize(1)
             .first()
-            .isEqualToComparingFieldByField(p1);
+            .usingRecursiveComparison()
+            .isEqualTo(p1);
     }
 
 	private Person createPerson(String name, String surname, int age) {

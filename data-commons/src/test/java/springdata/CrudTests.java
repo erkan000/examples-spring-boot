@@ -5,23 +5,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import springdata.pojo.Person;
 import springdata.repository.PersonCrudRepository;
 
-@RunWith(SpringRunner.class)
 @DataJpaTest
 public class CrudTests {
 
 	@Autowired
 	private PersonCrudRepository personRepository;
 
-	// DataJpaTest methods doesnt commit changes to DB!
+	// @DataJpaTest methods doesnt commit changes to DB!
 
 	@Test
 	public void crudTests() {
@@ -29,18 +25,21 @@ public class CrudTests {
 		
 		Person savedPerson = personRepository.save(refPerson);
 		assertThat(refPerson)
-			.isEqualToComparingFieldByField(savedPerson);	
+			.usingRecursiveComparison()
+			.isEqualTo(savedPerson);
 
 		Iterable<Person> savedPersons = personRepository.findAll();
 		assertThat(savedPersons)
 			.hasSize(1)
 			.first()
-			.isEqualToComparingFieldByField(refPerson);
+			.usingRecursiveComparison()
+			.isEqualTo(refPerson);
 
 		Optional<Person> findPerson = personRepository.findById(savedPerson.getId());
 		assertThat(findPerson.get())
 			.isNotNull()
-			.isEqualToComparingFieldByField(refPerson);
+			.usingRecursiveComparison()
+			.isEqualTo(refPerson);
 
 		personRepository.deleteById(savedPerson.getId());
 		assertThat(personRepository.count())
