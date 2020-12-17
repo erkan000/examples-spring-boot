@@ -1,5 +1,7 @@
 package helloworld;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -9,9 +11,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@WebMvcTest
+import helloworld.controller.TestController;
+
+@WebMvcTest(TestController.class)
 @TestPropertySource(properties = {"DB_USER = myUser"})
-class RestMockTest {
+class UnitTest {
 
 	@Autowired
 	private MockMvc mock;
@@ -21,7 +25,9 @@ class RestMockTest {
 		
 		this.mock.perform(MockMvcRequestBuilders.get("/api")
 				.accept(MediaType.APPLICATION_JSON))
-		.andExpect(MockMvcResultMatchers.jsonPath("$.env-variable").exists());
+		.andExpect(MockMvcResultMatchers.jsonPath("$.env-variable").exists())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk());
 		
 	}
 
