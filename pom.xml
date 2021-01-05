@@ -16,6 +16,7 @@
 	<modules>
 		<module>data-commons</module>
 		<module>hello-world</module>
+		<module>mvc</module>
 	</modules>
 	
 	<properties>
