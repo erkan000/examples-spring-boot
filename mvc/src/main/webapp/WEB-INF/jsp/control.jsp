@@ -10,8 +10,7 @@
     
     <form:errors path="*" element="div" />
     
-    <br/>
-    
+    <br/>    
         <table>
             <tr>
                 <td>
@@ -38,7 +37,6 @@
                 <td colspan="2">
                     <input type="submit" value="POST!">
                 </td>
-
             </tr>
         </table>
 

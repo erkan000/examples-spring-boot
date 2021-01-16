@@ -1,6 +1,12 @@
 ### Spring MVC
 
-- http://localhost:8080/mvc
-- http://localhost:8080/mvc/files/test.txt		static page serve
-- http://localhost:8080/mvc/person?nam=eee		restful service
-- http://localhost:8080/mvc/person.html			get with jquery
+- Run App.java from mvc package
+
+- Navigate to http://localhost:8080 and inspect samples
+
+- For rest samples, Inspect rest test class from IntegrationTest.java
+
+- Consume rest service with jQuery: "http://localhost:8080/person.html"
+
+- "http://localhost:8080/erkan" directly navigates to helloWorld.jsp
+

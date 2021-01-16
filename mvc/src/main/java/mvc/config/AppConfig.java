@@ -8,6 +8,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -25,10 +26,16 @@ public class AppConfig implements WebMvcConfigurer{
         return bean;
     }
     
+//    Easy view and controller mapping
+    @Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/erkan").setViewName("helloWorld");
+	}
+    
 //    Static resources config
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/files/**")
+        registry.addResourceHandler("/download/**")
                 .addResourceLocations("/WEB-INF/static/");
     }
   

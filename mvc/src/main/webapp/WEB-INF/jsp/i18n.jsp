@@ -8,7 +8,9 @@
     <h1>i18n</h1>
     This text changes based on "lang" parameter value : 
     
-    <spring:message code="label.name" />
+    <h3>
+    	<spring:message code="label.name" />
+    </h3>
     
 </body>
 </html>

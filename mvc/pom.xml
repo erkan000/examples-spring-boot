@@ -32,5 +32,10 @@
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
 
+		<!-- for 404 error on spring boot embedded server -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
 	</dependencies>
 </project>

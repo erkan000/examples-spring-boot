@@ -6,11 +6,11 @@
 </head>
 <body>
     <h1>Post Mapping</h1>
-    <form:form modelAttribute="per">
+    <form:form action="addme" modelAttribute="per">
         <table>
             <tr>
                 <td>
-                    Name:
+                    <form:label path="name">Name</form:label>
                 </td>
                 <td>
                     <form:input path="name" />

@@ -9,6 +9,14 @@ public class Person {
 	private LocalDate birthDay;
 	private boolean active;
 	private String city;
+	
+	public Person() {
+	}
+
+	public Person(String name, int id) {
+		this.name = name;
+		this.id = id;
+	}
 
 	public long getId() {
 		return id;
