@@ -42,7 +42,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.invalidateHttpSession(true)
 					.deleteCookies("JSESSIONID")
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logoutPath", "GET"))
-				.and()				
+//				.and()
+//				.csrf()
+//					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())	// CSRF tokenini cookie içine eklenmesini ve http den okunmasını sağlar. JS frontendler için
 				;
 		}
 		
