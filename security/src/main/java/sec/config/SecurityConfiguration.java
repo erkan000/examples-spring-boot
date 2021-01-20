@@ -28,8 +28,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.anyRequest().authenticated()			// Bütün "/" a gelen istekleri yetkilendir.
 					.and()
 				.formLogin()
-					.successHandler(new AuthSuccessHandlerImpl())
-					.failureHandler(new AuthFailHandlerImpl())
+					.successHandler(new AuthSuccessHandlerImpl()) // defaultSuccessUrl eklemediğin sürece çalışır
+					.failureHandler(new AuthFailHandlerImpl()) // failureUrl eklemediğin sürece çalışır
 					.loginPage("/login")					// login page path i
 					.failureUrl("/login?loginError")		// şifre yanlış ise hangi parametre gönderilsin
 					.loginProcessingUrl("/per_login")		// login form action ı rename ediyor sadece	
