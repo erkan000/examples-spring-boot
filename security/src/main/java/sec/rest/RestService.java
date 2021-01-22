@@ -3,6 +3,7 @@ package sec.rest;
 import java.security.Principal;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +18,8 @@ public class RestService {
 	}
 	
 	@GetMapping("testUser")
-	public String portfolioPositions(@AuthenticationPrincipal Principal principal) {
-		String username = principal.getName();
+	public String portfolioPositions(@AuthenticationPrincipal User principal) {
+		String username = principal.getUsername();
 		return "You are " + username;
 	}
 }

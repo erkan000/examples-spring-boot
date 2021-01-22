@@ -1,6 +1,9 @@
 package sec.controller;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,9 +16,15 @@ public class MethodBasedAuthController {
         return "roleUser";
     }    
 
-    @Secured("ROLE_ADMIN")
+    @RolesAllowed("ROLE_ADMIN")
     @GetMapping("roleAdmin")
     public String roleAdmin() {
+        return "roleAdmin";
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("roleAdmin2")
+    public String roleAdmin2() {
         return "roleAdmin";
     }  
 }

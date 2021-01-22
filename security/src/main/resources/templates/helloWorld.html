@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="UTF-8" />
@@ -19,6 +19,9 @@
 		<div>
 			<p th:text="${message}"></p>
 		</div>
+		<div>
+			Username with security tag library: <span sec:authentication="name"></span>
+		</div>		
 	</div>
 </body>
 </html>
