@@ -1,0 +1,1 @@
+{"type":"record","name":"CarModel","namespace":"kafka.avro","fields":[{"name":"make","type":"string"},{"name":"model","type":"string"}]}
