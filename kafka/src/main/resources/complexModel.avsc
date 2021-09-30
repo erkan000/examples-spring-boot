@@ -1,0 +1,35 @@
+{"type":"record",
+"name":"CarModel2",
+"namespace":"kafka.avro",
+"fields":[
+	{"name":"make","type":"string"},
+	
+
+        
+	{
+            "name": "myenum",
+            "type": ["null", {
+                    "type": "enum",
+                    "name": "Suit",
+                    "symbols": ["SPADES", "HEARTS", "DIAMONDS", "CLUBS"]
+                }
+            ]
+        },
+        
+        {      
+        "name":"myArray",  
+        "type":{
+        		
+                "type": "array",  
+                "items":{
+                    "name":"Child",
+                    "type":"record",
+                    "fields":[
+                        {"name":"name", "type":"string"}
+                    ]
+                }
+            }
+            }
+	
+
+	]}
