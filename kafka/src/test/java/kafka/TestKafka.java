@@ -47,7 +47,7 @@ public class TestKafka {
 	@Test
 	void testDistinct() {
 
-		String inputTopic = "erkan-avro-test";
+		String inputTopic = "a";
 		String outputTopic = "erkan-avro-test";
 		try (
 				Producer<String, String> producer = configureProducer();
@@ -69,36 +69,6 @@ public class TestKafka {
 		}
 	}
 	
-	protected void testWithAwaitility(String inputTopicName, String outputTopicName) throws InterruptedException {
-        try (Consumer<String, String> consumer = configureConsumer(outputTopicName);
-             Producer<String, String> producer = configureProducer()) {
-
-            Stream.of("A", "B", "B", "A")
-                    .map(e -> new ProducerRecord<>(inputTopicName, e, e))
-                    .forEach(producer::send);
-            producer.flush();
-
-            //We are using thread-safe data structure here, since it's shared between consumer and verifier
-            List<String> actual = new CopyOnWriteArrayList<>();
-            ExecutorService service = Executors.newSingleThreadExecutor();
-            Future<?> consumingTask = service.submit(() -> {
-                while (!Thread.currentThread().isInterrupted()) {
-                    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-                    for (ConsumerRecord<String, String> rec : records) {
-                        actual.add(rec.value());
-                    }
-                }
-            });
-
-            try {
-                Awaitility.await().atMost(5, SECONDS)
-                        .until(() -> List.of("A", "B").equals(actual));
-            } finally {
-                consumingTask.cancel(true);
-                service.awaitTermination(200, MILLISECONDS);
-            }
-        }
-    }
 
 	private Producer<String, String> configureProducer() {
 		Map<String, Object> producerProps = new HashMap<>(KafkaTestUtils.producerProps(
@@ -108,7 +78,7 @@ public class TestKafka {
 	}
     private Consumer<String, String> configureConsumer(String outputTopicName) {
         Map<String, Object> consumerProps = KafkaTestUtils.consumerProps(
-                String.join(",", config.getBootstrapservices()), "testGroup", "true");
+                String.join(",", config.getBootstrapservices()), "testGroup2", "true");
         consumerProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         Consumer<String, String> consumer = new DefaultKafkaConsumerFactory<>(consumerProps,
                 new StringDeserializer(), new StringDeserializer())

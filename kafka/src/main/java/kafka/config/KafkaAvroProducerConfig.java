@@ -28,7 +28,7 @@ public class KafkaAvroProducerConfig<K extends Serializable, V extends SpecificR
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,  config.getBootstrapservices());
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
-        props.put("schema.registry.url", "http://kafka2test");
+        props.put("schema.registry.url", "http://localhost:8081");
         
         props.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384);
         props.put(ProducerConfig.LINGER_MS_CONFIG, 5);
