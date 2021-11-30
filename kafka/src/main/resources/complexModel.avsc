@@ -1,10 +1,9 @@
-{"type":"record",
+{
+"type":"record",
 "name":"CarModel2",
 "namespace":"kafka.avro",
 "fields":[
 	{"name":"make","type":"string"},
-	
-
         
 	{
             "name": "myenum",
