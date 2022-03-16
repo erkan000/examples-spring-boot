@@ -1,0 +1,8 @@
+subscription {
+  streamPersonEvent {
+        age
+        name
+        email
+        __typename
+  }
+}

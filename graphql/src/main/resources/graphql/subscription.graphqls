@@ -1,0 +1,6 @@
+
+type Subscription {
+  
+  streamPersonEvent: Person
+  
+}

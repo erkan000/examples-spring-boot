@@ -1,0 +1,7 @@
+
+type Query {
+
+ 	getPersons: [Person]! ,
+    getPersonByAge(age: Int): Person
+    
+}

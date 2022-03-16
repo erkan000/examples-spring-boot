@@ -1,0 +1,19 @@
+query {
+      getPersons{
+        age
+        name
+        email
+        __typename
+      }
+  }
+  
+--------------------------------------------
+
+query {
+    getPersonByAge(age: 266){
+      age
+      name
+      email
+      __typename
+    }
+}

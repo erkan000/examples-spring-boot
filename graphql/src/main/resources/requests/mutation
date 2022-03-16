@@ -1,0 +1,8 @@
+mutation {
+    createPerson(age: 266, name: "erk", email: "ee@mail"){
+      age
+      name
+      email
+      __typename
+    }
+}

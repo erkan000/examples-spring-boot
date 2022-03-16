@@ -1,0 +1,15 @@
+type Person {
+    age: Int
+    name: String!
+    email: String!
+}
+
+# The Root Query for the application
+type Query {
+    getPersons: [Person]!
+}
+
+type Mutation {
+	createPerson(name: String, age: Int, email: String) : Person
+}
+
