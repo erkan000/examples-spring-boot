@@ -1,4 +1,4 @@
-package graphql.subscription;
+package graphql.subscription.ksqldb;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,9 +14,9 @@ import io.confluent.ksql.api.client.Client;
 import io.confluent.ksql.api.client.ClientOptions;
 
 @Component
-public class Subscription implements GraphQLSubscriptionResolver {
+public class KsqldbSubscription implements GraphQLSubscriptionResolver {
 
-	public Publisher<Person> streamPersonEvent() throws MalformedURLException {
+	public Publisher<Person> streamPersonKsqldb() throws MalformedURLException {
 
 		URL endpoint = new URL("http://localhost:8088");
 		final ClientOptions options = ClientOptions.create()
@@ -28,13 +28,13 @@ public class Subscription implements GraphQLSubscriptionResolver {
 		final ReactorClient reactorClient = ReactorClient.from(Client.create(options));
 
 		return reactorClient
-				.streamQuery("SELECT * from ServiceCategorySourceTAble2 emit changes;")
+				.streamQuery("SELECT * from mytable emit changes;")
 				.map(row -> {
 					return new Person(row.getValue(1).toString(), 3, row.getValue(2).toString());
 				});
 		
 		//		Client client = Client.create(options);
-		//		CompletableFuture<StreamedQueryResult> stream = client.streamQuery("SELECT * from LeftyProviderServiceViewTAble emit changes;");
+		//		CompletableFuture<StreamedQueryResult> stream = client.streamQuery("SELECT * from mytable emit changes;");
 		//		Publisher<Row> result = FlowAdapters.toFlowPublisher(stream.get());		
 		//		stream.thenAccept(streamedQueryResult -> {
 		//			System.out.println("Query has started. Query ID: " + streamedQueryResult.queryID());
@@ -47,6 +47,6 @@ public class Subscription implements GraphQLSubscriptionResolver {
 	}
 
 	
-	private Logger logger = LoggerFactory.getLogger(Subscription.class);
+	private Logger logger = LoggerFactory.getLogger(KsqldbSubscription.class);
 
 }

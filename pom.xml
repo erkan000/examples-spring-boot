@@ -19,6 +19,9 @@
 		<module>mvc</module>
 		<module>security</module>
 		<module>kafka</module>
+		<module>graphql</module>
+		<module>websocket-client</module>
+		<module>websocket-server</module>
 	</modules>
 
 	<properties>
