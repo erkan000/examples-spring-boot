@@ -1,7 +1,12 @@
 
+input Address {
+    city: String,
+	street: String
+}
+
 type Query {
 
  	getPersons: [Person]! ,
-    getPersonByAge(age: Int): Person
+    getPersonByAge(age: Int, address: Address): Person
     
 }

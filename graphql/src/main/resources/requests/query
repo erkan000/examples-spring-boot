@@ -10,7 +10,7 @@ query {
 --------------------------------------------
 
 query {
-    getPersonByAge(age: 266){
+    getPersonByAge(age: 266, address: { city: "3", street: "ss" }){
       age
       name
       email
