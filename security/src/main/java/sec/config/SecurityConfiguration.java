@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import sec.config.auth.CustomUserDetailsService;
 import sec.handler.AuthFailHandlerImpl;
 import sec.handler.AuthSuccessHandlerImpl;
 
@@ -53,6 +54,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 			auth.inMemoryAuthentication().withUser("erkan").password("{noop}erkan").roles("ADMIN"); // ROLE_ önüne otomatik ekleniyor
 			auth.inMemoryAuthentication().withUser("test").password("{noop}test").roles("USER");
+			
+			auth.userDetailsService(new CustomUserDetailsService()); // CustomUserDetailsService den alır kullanıcı
 		}
 
 		// Bazı pathlerde auth yapma
