@@ -12,6 +12,7 @@ services:
       MINIO_ROOT_PASSWORD: minioadmin
     networks:
       - ${GLOBAL_NETWORK:-minio}
+    command: server /data --console-address ":9001"
 
 networks:
   application:

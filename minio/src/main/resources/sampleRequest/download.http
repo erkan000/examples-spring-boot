@@ -1,0 +1,4 @@
+###
+GET http://localhost:8080/download2?file=test.txt
+
+

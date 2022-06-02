@@ -1,0 +1,12 @@
+###
+POST http://localhost:8080/upload2
+Content-Type: multipart/form-data; boundary="boundary_1654199847458"
+
+
+--boundary_1654199847458
+Content-Disposition: form-data; name="file"; filename="test.txt"
+
+dosya icerigi budur 123
+
+--boundary_1654199847458
+

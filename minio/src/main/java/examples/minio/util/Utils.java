@@ -1,7 +1,6 @@
 package examples.minio.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -33,9 +32,10 @@ public class Utils {
 	@Autowired
 	MinioConfig conf;
 
-	public void checkBucket(MinioClient minioClient) throws MinioException, IOException, InvalidKeyException, NoSuchAlgorithmException {
+	public void checkBucket() throws MinioException, IOException, InvalidKeyException, NoSuchAlgorithmException {
 		
-		boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(MinioConfig.minioBucketName).build());
+		MinioClient minioClient = conf.getClient();
+		boolean found = minioClient .bucketExists(BucketExistsArgs.builder().bucket(MinioConfig.minioBucketName).build());
 		if (!found) {
 			logger.info("Bucket doesnt exists, creating new one.");
 			minioClient.makeBucket(MakeBucketArgs.builder().bucket(MinioConfig.minioBucketName).build());
@@ -58,22 +58,18 @@ public class Utils {
 	}
 	
 	 public void uploadFile(String name, byte[] content) {
-	        File file = new File("/tmp/" + name);
-	        file.canWrite();
-	        file.canRead();
 	        try {
-	            FileOutputStream iofs = new FileOutputStream(file);
-	            iofs.write(content);
+	            ByteArrayInputStream bais = new ByteArrayInputStream(content);
 	            PutObjectArgs object = PutObjectArgs.builder()
 	            		.bucket(MinioConfig.minioBucketName)
 	    				.object(name)
+	    				.stream(bais, bais.available(), -1)
 	    				.build();
 				conf.getClient().putObject(object);
-				iofs.close();
+				bais.close();
 	        } catch (Exception e) {
 	           throw new RuntimeException(e.getMessage());
 	        }
-
 	    }
 	
 	private Logger logger = LoggerFactory.getLogger(Utils.class);
