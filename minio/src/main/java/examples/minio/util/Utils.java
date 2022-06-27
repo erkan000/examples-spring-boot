@@ -17,6 +17,7 @@ import io.minio.GetObjectArgs;
 import io.minio.GetObjectResponse;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
+import io.minio.ObjectWriteResponse;
 import io.minio.PutObjectArgs;
 import io.minio.errors.ErrorResponseException;
 import io.minio.errors.InsufficientDataException;
@@ -65,7 +66,8 @@ public class Utils {
 	    				.object(name)
 	    				.stream(bais, bais.available(), -1)
 	    				.build();
-				conf.getClient().putObject(object);
+	            ObjectWriteResponse response = conf.getClient().putObject(object);
+	            logger.info("Etag is: " + response.etag());
 				bais.close();
 	        } catch (Exception e) {
 	           throw new RuntimeException(e.getMessage());
