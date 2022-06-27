@@ -1,30 +1,26 @@
 package examples.minio.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
+import examples.minio.dto.Dto;
 import examples.minio.util.Utils;
 
 @RestController
-public class MinioController {
+public class DownloadController {
 
 	@Autowired
 	Utils utils;
 
 	@GetMapping(path = "/download")
-	public ResponseEntity<ByteArrayResource> uploadFile(@RequestParam(value = "file") String file) throws IOException {
+	public ResponseEntity<ByteArrayResource> downloadFile(@RequestParam(value = "file") String file) throws IOException {
 		file = "testFileName.txt";
 		ResponseEntity<ByteArrayResource> resp = null;
 		try {
@@ -42,12 +38,20 @@ public class MinioController {
 		return resp;
 	}
 	
-	@PostMapping(path = "/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Map<String, String> uploadFile(@RequestPart(value = "file", required = false) MultipartFile files) throws IOException {
-		utils.uploadFile(files.getOriginalFilename(), files.getBytes());
-        Map<String, String> result = new HashMap<>();
-        result.put("key", files.getOriginalFilename());
-        return result;
-    }
+	@GetMapping(path = "/downloadBase64")
+	public Dto downloadFileBase64(@RequestParam(value = "file") String file) throws IOException {
+		byte[] data = null;
+		Dto dto = new Dto();
+		try {
+			data = utils.downloadFile(file);
+			dto.setAdi(file);
+			dto.setId(1);
+			dto.setData(Base64.getEncoder().encodeToString(data));
+		} catch (Exception e) {
+			System.err.println(e);
+			dto.setAdi(e.getMessage());
+		}
+		return dto;
+	}
 
 }
