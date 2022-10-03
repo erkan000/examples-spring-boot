@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tictactoe.game.dto.BoardDTO;
 import com.tictactoe.game.dto.GameStartDTO;
 import com.tictactoe.game.dto.GridDTO;
-import com.tictactoe.game.service.GameData;
 import com.tictactoe.game.service.GameService;
 
 @RestController
