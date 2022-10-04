@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "155357c5-26b6-4ba4-8804-e54044c578ff",
+		"name": "tictactoe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Start Game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"playerToken\":\"Xk\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tictactoe/game",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tictactoe",
+						"game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Board status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tictactoe/game/TQHeS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tictactoe",
+						"game",
+						"TQHeS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Move",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"row\":1,\r\n    \"col\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tictactoe/game/TQHeS/move",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tictactoe",
+						"game",
+						"TQHeS",
+						"move"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
