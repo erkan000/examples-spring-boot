@@ -1,0 +1,6 @@
+joinfaces:
+  jsf:
+    PROJECT_STAGE: Production
+    FACELETS_LIBRARIES: /tags/tags.taglib.xml
+  primefaces:
+    theme: vela
