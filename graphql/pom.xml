@@ -10,10 +10,6 @@
 	<groupId>examples.springboot.graphql</groupId>
 	<artifactId>graphql</artifactId>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.graphql-java-kickstart</groupId>
@@ -31,7 +27,7 @@
 			<artifactId>reactor-core</artifactId>
 		</dependency>
 
-<dependency>
+		<dependency>
 			<groupId>io.confluent.ksql</groupId>
 			<artifactId>ksqldb-api-client</artifactId>
 			<version>7.0.1</version>
@@ -44,16 +40,10 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 	
 	<repositories>
