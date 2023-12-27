@@ -1,4 +1,4 @@
-### KAfka
+### Kafka
 
 #### Usage:
 - Copy project
